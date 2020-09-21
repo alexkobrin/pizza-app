@@ -3,10 +3,8 @@ import rootReduser from './redusers'
  
 
 
-const store = createStore(rootReduser )
-console.log(rootReduser)
-
-window.store = store
+const store = createStore(rootReduser , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() )
+ 
 
 
 export default store
