@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-
+import Button from '../Button';
 
 function PizzaBlock(props) {
   const typeNames = ['тонкое', 'традиционное'];
@@ -15,9 +15,7 @@ function PizzaBlock(props) {
   const onSelectSize = (index) => {
     setActiveSize(index);
   };
-   
 
-  
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={props.imageUrl} alt="Pizza" />
@@ -52,7 +50,7 @@ function PizzaBlock(props) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {props.price} ₽</div>
-        <div className="button button--outline button--add">
+        <Button className="button--add" outline>
           <svg
             width="12"
             height="12"
@@ -66,7 +64,7 @@ function PizzaBlock(props) {
           </svg>
           <span>Добавить</span>
           <i>2</i>
-        </div>
+        </Button>
       </div>
     </div>
   );

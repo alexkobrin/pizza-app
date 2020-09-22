@@ -16,9 +16,9 @@ const SortPopUp = React.memo(function SortPopUp({ items, activeSortType, onClick
 
   const handlelOutSideClick = (event) => {
     if (event.target !== sortRef.current) {
-      setTimeout(() => {
+     setTimeout(() => {
         setVisiblePopUp(false);
-      }, 500);
+     }, 500);
     }
   };
 
