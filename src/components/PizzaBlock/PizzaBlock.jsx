@@ -2,19 +2,22 @@ import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
+
 function PizzaBlock(props) {
   const typeNames = ['тонкое', 'традиционное'];
   const avalibleSizes = [26, 30, 40];
   const [activeType, setActiveType] = React.useState(props.types[0]);
   const [activeSize, setActiveSize] = React.useState(props.sizes[0]);
-  
+
   const onSelectType = (index) => {
     setActiveType(index);
   };
   const onSelectSize = (index) => {
     setActiveSize(index);
   };
+   
 
+  
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={props.imageUrl} alt="Pizza" />
@@ -34,16 +37,15 @@ function PizzaBlock(props) {
           ))}
         </ul>
         <ul>
-        {avalibleSizes.map((size, index) => (
+          {avalibleSizes.map((size, index) => (
             <li
               key={size}
               onClick={() => onSelectSize(index)}
               className={classNames({
-                 active: activeSize === index,
-                 disabled: !props.sizes.includes(size),
+                active: activeSize === index,
+                disabled: !props.sizes.includes(size),
               })}>
               {size} см.
-              
             </li>
           ))}
         </ul>
@@ -71,22 +73,22 @@ function PizzaBlock(props) {
 }
 
 PizzaBlock.propTypes = {
-    name: PropTypes.string.isRequired,
-    imageUrl: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    types: PropTypes.arrayOf(PropTypes.number).isRequired,
-    sizes: PropTypes.arrayOf(PropTypes.number).isRequired
-    
+  name: PropTypes.string.isRequired,
+  imageUrl: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  types: PropTypes.arrayOf(PropTypes.number).isRequired,
+  sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
+  isLoading: PropTypes.bool,
 };
- 
+
 // When some property are missing , we can set default props
 PizzaBlock.defaultProps = {
-    name: '---',
-    price: 100,
-    size: [],
-    types:[],
-    imageUrl: '/'
-}
-
+  name: '---',
+  price: 100,
+  size: [],
+  types: [],
+  imageUrl: '/',
+  isLoading: false,
+};
 
 export default PizzaBlock;
