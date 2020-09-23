@@ -9,4 +9,4 @@ export { default as Categories } from './Categories';
 export { default as SortPopUp } from './SortPopUp';
 export { default as PizzaBlock } from './PizzaBlock/PizzaBlock.jsx';
 export { default as LoadingPizza } from './PizzaBlock/LoadingPizza';
- // export { Button, Header, Categories};
+export { default as CartItem } from './CartItem';
