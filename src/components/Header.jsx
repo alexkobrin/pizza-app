@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import logoSvg from '../assets/img/pizza-logo.svg';
 import Button from './Button';
 import { useSelector } from 'react-redux';
-import cart from '../redux/redusers/cart';
+//import cart from '../redux/redusers/cart';
 
 function Header(props) {
    
@@ -28,7 +28,7 @@ function Header(props) {
 
         <div className="header__cart">
           <Link to="/cart">
-            <Button className="button--cart">
+            <Button    className="button--cart">
               <span>{totalPrice} ₽</span>
               <div className="button__delimiter"></div>
               <svg

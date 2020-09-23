@@ -3,11 +3,11 @@ import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import Button from '../Button';
 
-function PizzaBlock(props) {
+function PizzaBlock({ id, name, imageUrl, price, types, sizes, onClickAddPizza,addedCount }) {
   const typeNames = ['тонкое', 'традиционное'];
   const avalibleSizes = [26, 30, 40];
-  const [activeType, setActiveType] = React.useState(props.types[0]);
-  const [activeSize, setActiveSize] = React.useState(props.sizes[0]);
+  const [activeType, setActiveType] = React.useState(types[0]);
+  const [activeSize, setActiveSize] = React.useState(0);
 
   const onSelectType = (index) => {
     setActiveType(index);
@@ -15,11 +15,24 @@ function PizzaBlock(props) {
   const onSelectSize = (index) => {
     setActiveSize(index);
   };
+  const onAddPizza = () => {
+     const obj = {
+       id,
+       name,
+       imageUrl,
+       price,
+       size: avalibleSizes[activeSize],
+       type: typeNames[activeType],
+    };
+    onClickAddPizza(obj);
+  };
+
+    
 
   return (
     <div className="pizza-block">
-      <img className="pizza-block__image" src={props.imageUrl} alt="Pizza" />
-      <h4 className="pizza-block__title">{props.name}</h4>
+      <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
+      <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>
           {typeNames.map((type, index) => (
@@ -28,7 +41,7 @@ function PizzaBlock(props) {
               onClick={() => onSelectType(index)}
               className={classNames({
                 active: activeType === index,
-                disabled: !props.types.includes(index),
+                disabled: !types.includes(index),
               })}>
               {type}
             </li>
@@ -41,7 +54,7 @@ function PizzaBlock(props) {
               onClick={() => onSelectSize(index)}
               className={classNames({
                 active: activeSize === index,
-                disabled: !props.sizes.includes(size),
+                disabled: !sizes.includes(size),
               })}>
               {size} см.
             </li>
@@ -49,8 +62,8 @@ function PizzaBlock(props) {
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от {props.price} ₽</div>
-        <Button className="button--add" outline>
+        <div className="pizza-block__price">от {price} ₽</div>
+        <Button onClick={onAddPizza} className="button--add" outline>
           <svg
             width="12"
             height="12"
@@ -63,7 +76,7 @@ function PizzaBlock(props) {
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {addedCount && <i>{addedCount}</i>}
         </Button>
       </div>
     </div>
@@ -77,6 +90,8 @@ PizzaBlock.propTypes = {
   types: PropTypes.arrayOf(PropTypes.number).isRequired,
   sizes: PropTypes.arrayOf(PropTypes.number).isRequired,
   isLoading: PropTypes.bool,
+  //onAddPizza: PropTypes.func,
+  addedCount: PropTypes.number,
 };
 
 // When some property are missing , we can set default props

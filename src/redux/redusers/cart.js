@@ -1,45 +1,43 @@
 
 const initialState = {
-    items: {},
-    totalPrice: 0,
-    totalCount: 0,
- };
- 
- 
- const cart = (state = initialState, action) => {
- 
-    switch (action.type) {
-       case 'ADD_PIZZA_CART':
-          return {
-             ...state,
-             items:  {
-                 [action.payload.id]: [
-                     ...state.items[action.payload.id],
-                     action.payload
-                 ]
-             },
-             
-          };
-           
-          case 'SET_TOTAL_COUNT':
-            return {
-               ...state,
-               totalCount:  action.payload,
-            };
-             
-           
-       default:
+   items: {},
+   totalPrice: 0,
+   totalCount: 0,
+};
+
+
+const cart = (state = initialState, action) => {
+
+   switch (action.type) {
+      case 'ADD_PIZZA_CART':
+
+         const newItems = {
+            ...state.items,
+            [action.payload.id]: !state.items[action.payload.id] ? [action.payload] :
+               [...state.items[action.payload.id], action.payload],
+         }
+
+         const allPizzas = [].concat.apply([], Object.values(newItems))
+         const totalPrice = allPizzas.reduce((sum, obj) => obj.price + sum, 0);
+         return {
+            ...state,
+            items: newItems,
+            totalCount: allPizzas.length,
+            totalPrice: totalPrice
+         }
+
+      default:
          return state
-    }
- 
- 
- 
-    // if(action.type === 'SET_CATEGORY') {
-    //     return  {
-    //         ...state ,
-    //         sortBy: action.payload
-    //      }
-   
- };
- 
- export default cart;
+   }
+
+
+
+   // if(action.type === 'SET_CATEGORY') {
+   //     return  {
+   //         ...state ,
+   //         sortBy: action.payload
+   //      }
+
+};
+
+export default cart;
