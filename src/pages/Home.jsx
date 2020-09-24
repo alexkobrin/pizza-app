@@ -33,6 +33,7 @@ function Home() {
   const addPizza = (obj) => {
     dispatch(addPizzaToCart(obj));
   };
+   
 
   return (
     <div className="container">
@@ -45,7 +46,7 @@ function Home() {
         {isLoaded
           ? items.map((obj) => (
               <PizzaBlock
-              addedCount={cartItems[obj.id] && cartItems[obj.id].length}
+              addedCount={cartItems[obj.id] && cartItems[obj.id].items.length}
                onClickAddPizza={addPizza} key={obj.id} isLoaded={true} {...obj} />
             ))
           : Array(12)
