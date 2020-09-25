@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom';
 
 
 import { CartItem } from '../components';
-import { clearToCart , removeCartItem } from '../redux/actions/cart';
+import {plusCartItem, minusCartItem, clearToCart , removeCartItem } from '../redux/actions/cart';
 import cartEmpty from '../assets/img/empty-cart.png';
 
 function Cart() {
@@ -13,6 +13,11 @@ function Cart() {
   const groupPizzas = Object.keys(items).map((key) => {
     return items[key].items[0];
   });
+
+
+    
+
+
 
   const onClearCart = () => {
     if (window.confirm(' Вы уверены, что хотите очистить корзину ?')) {
@@ -24,12 +29,12 @@ function Cart() {
       distatch(removeCartItem(id))
     }  
   }
-//  const onPlusItem = (id) => {
-//   distatch(plusCartItem(id))
-//  }
-//  const onMinusItem = (id) => {
-//   distatch(minusCartItem(id))
-//  }
+ const onPlusItem = (id) => {
+  distatch(plusCartItem(id))
+ }
+ const onMinusItem = (id) => {
+  distatch(minusCartItem(id))
+ }
 
 
 
@@ -121,8 +126,8 @@ function Cart() {
                 type={obj.type}
                 size={obj.size}
                 clicked={onRemoveItem}
-                // onPlus = {onPlusItem}
-                // onMinus ={onMinusItem}
+                onPlus = {onPlusItem}
+                onMinus ={onMinusItem}
               />
             ))}
           </div>
